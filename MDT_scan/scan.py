@@ -8,24 +8,55 @@ from VISA import *
 def run():
 
     connect()
-    startz = input("Initial x voltage: ")
-    # check_num(startz)
-    print(f"Initial z voltage = {startz} volts")
-    starty = input("Initial y voltage: ")
-    # check_num(starty)
-    print(f"Initial y voltage = {starty} volts")
-    stopz = input("Final x voltage: ")
-    # check_num(stopz)
-    print(f"Final z voltage = {stopz} volts")
-    stopy = input("Final y voltage: ")
-    # check_num(stopy)
-    print(f"Final y voltage = {stopy} volts")
-    step = input("Step voltage: ")
-    # check_num(step)
-    print(f"Step voltage = {step} volts")
-    scan(startz, starty, stopz, stopy, step)
+    userinput = input("Enter command: ")
 
-    exit_input = input("Press any input to exit: ")
+    while len(userinput) != 0:
+
+        if userinput.lower() == "scan":
+            startz = float(input("Initial z voltage: "))
+            # check_num(startz)
+            print(f"Initial z voltage = {startz} volts")
+            starty = float(input("Initial y voltage: "))
+            # check_num(starty)
+            print(f"Initial y voltage = {starty} volts")
+            stopz = float(input("Final z voltage: "))
+            # check_num(stopz)
+            print(f"Final z voltage = {stopz} volts")
+            stopy = float(input("Final y voltage: "))
+            # check_num(stopy)
+            print(f"Final y voltage = {stopy} volts")
+            step = float(input("Step voltage: "))
+            # check_num(step)
+            print(f"Step voltage = {step} volts")
+            scan(startz, starty, stopz, stopy, step)
+        
+        elif userinput.lower() == "scan2":
+            startz = float(input("Initial z voltage: "))
+            # check_num(startz)
+            print(f"Initial z voltage = {startz} volts")
+            starty = float(input("Initial y voltage: "))
+            # check_num(starty)
+            print(f"Initial y voltage = {starty} volts")
+            stopz = float(input("Final z voltage: "))
+            # check_num(stopz)
+            print(f"Final z voltage = {stopz} volts")
+            stopy = float(input("Final y voltage: "))
+            # check_num(stopy)
+            print(f"Final y voltage = {stopy} volts")
+            step = float(input("Step voltage: "))
+            # check_num(step)
+            print(f"Step voltage = {step} volts")
+            scan2(startz, starty, stopz, stopy, step)
+        
+        elif userinput.lower() == "disconnect":
+            disconnect()
+        
+        else:
+            print("Command not recognized")
+        
+        userinput = input("Enter command: ")
+
+
 
 
 def scan(startz, starty, stopz, stopy, step):
