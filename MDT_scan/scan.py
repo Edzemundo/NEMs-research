@@ -1,3 +1,11 @@
+"""scan.py
+Author: Edmund Agyekum
+
+This program is meant to control both the open-loop piezo-controller and the digital multimeter to undergo
+image scanning of the sample.
+
+"""
+
 import time
 import VISA
 from MDT import *
@@ -60,6 +68,8 @@ def run():
 
 
 def scan(startz, starty, stopz, stopy, step):
+    """scans and records
+    """
 
     global filename
     filename = input("filename: ")
