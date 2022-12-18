@@ -4,6 +4,8 @@ Author: Edmund S. Agyekum
 This program is meant to control both the open-loop piezo-controller and the digital multimeter to undergo
 image scanning of the sample.
 
+Program now also supports making the image of the file directly after scanning.
+
 """
 
 import time
@@ -180,7 +182,7 @@ def chart(x_value, y_value, z_value):
     file = open(f"{filename}", "a")
     file.write(f"{x_value},{y_value},{z_value}\n")
     file.close()
-    
+
 
 def check_num(number):
     """Checks if input is a number"""
