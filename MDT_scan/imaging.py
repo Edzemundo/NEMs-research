@@ -1,49 +1,63 @@
-from PIL import Image
+"""imaging.py
+Author: Edmund S. Agyekum
+
+This program creates an image of the txt file created by the scan.py program using the Pillow library
+and an array created through numpy
+
+"""
 import numpy as np
-import os
+from PIL import Image as im
 
-row = 5
-column = 5
+def imagify(filelocin):
+    """creates an image of the txt file created after running scan
+    """
+    # filelocin = "trial73.txt"
+    fileloc = filelocin.replace("'","")
 
-max_voltage = float("-inf")
-min_voltage = float("inf")
-max_y = 0
-max_x = 0
+    # opens txt result file from experiment
+    with open(fileloc) as file:
+        dataraw = file.read()
+        data = dataraw.split()
 
-with open(os.path.join(os.getcwd(), "trial29.txt"), "r") as file:
-    lines = file.readlines()
-    
+    # determines dimensions of array
+    lastline = data[-1].split(",")
+    rows = int(lastline[0])+1
+    columns = int(lastline[1])+1  
 
-    for line in lines:
-        elements = line.split(",")
-        # print(elements)
-        if float(elements[2]) > max_voltage:
-            max_voltage = float(elements[2])
-        elif float(elements[2]) < min_voltage:
-            min_voltage = float(elements[2])
-        if int(elements[0]) > max_x:
-            max_x = int(elements[0])
-        if int(elements[1]) > max_y:
-            max_y = int(elements[1])
-    
-    max_x += 1
-    max_y += 1
+    # finding the min and max voltage values
+    min = 100.0
+    max = -100.0
 
-    arr = np.zeros((max_y, max_x), np.int64)
-    print(max_x)
-    print(max_y)
+    for elements in data:
+        element = elements.split(",")
+        if float(element[2]) < min:
+            min = float(element[2])
+        if float(element[2]) > max:
+            max = float(element[2])
 
-    for line in lines:
-        elements = line.split(",")
-        # print(elements)
-        voltage = float(elements[2])
-        value = int(abs(((voltage - min_voltage) / (max_voltage - min_voltage))) * 255)
-        arr[int(elements[1]), int(elements[0])] = value
+# converting to 0-255 scale and make a list of those transformed values
+    valuelist = []
+
+    ratio = lambda x : ((x-min)/(max-min))*255
+    for elements in data:
+        element = elements.split(",")
+        value = int(ratio(float(element[2])))
+        valuelist.append(value)
+
+# creating the array and picture from it and names picture after text file
+    arr = np.array(valuelist)
+    grid = np.reshape(arr, (rows,columns))
+    image = im.fromarray(grid.astype(np.uint8))
+    image = image.rotate(90)
+    image = image.transpose(im.FLIP_TOP_BOTTOM)
+    imagename = fileloc.replace(".txt",".png")
+    image.save(imagename)
 
 
-img = Image.fromarray(arr, "L")
+    print(f"rows = {rows}, columns = {columns}")
+    print(f"max value = {max}, min value = {min}")
+    print(image)
 
-img.show()
-# print(arr)
-
-# np.savetxt("img.txt", arr)
+if __name__ == "__main__":
+    filelocin = input("drag and drop file here or type name of file if it is in the same folder/directory:")
+    imagify(filelocin)

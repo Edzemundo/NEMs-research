@@ -1,5 +1,5 @@
 """scan.py
-Author: Edmund Agyekum
+Author: Edmund S. Agyekum
 
 This program is meant to control both the open-loop piezo-controller and the digital multimeter to undergo
 image scanning of the sample.
@@ -10,11 +10,13 @@ import time
 import VISA
 from MDT import *
 from VISA import *
+from imaging import *
 
 
 
 def run():
-
+    """Used to assign and run various commands
+    """
     connect()
     userinput = input("Enter command: ")
 
@@ -37,6 +39,9 @@ def run():
             # check_num(step)
             print(f"Step voltage = {step} volts")
             scan(startz, starty, stopz, stopy, step)
+            secondinput = input("Would you like to create an image from txt file?:")
+            if secondinput.lower() == "yes" or "y" or "yeah" or "roger roger":
+                imagify(filename)
         
         elif userinput.lower() == "scan2":
             startz = float(input("Initial z voltage: "))
@@ -55,6 +60,9 @@ def run():
             # check_num(step)
             print(f"Step voltage = {step} volts")
             scan2(startz, starty, stopz, stopy, step)
+            secondinput = input("Would you like to create an image from txt file?:")
+            if secondinput.lower() == "yes" or "y" or "yeah" or "roger roger":
+                imagify(filename)
         
         elif userinput.lower() == "disconnect":
             disconnect()
@@ -167,12 +175,15 @@ def scan2(startz, starty, stopz, stopy, step):
 
 
 def chart(x_value, y_value, z_value):
+    """Creates and appends a text csv file with position and value of voltage"""
     global file
     file = open(f"{filename}", "a")
     file.write(f"{x_value},{y_value},{z_value}\n")
     file.close()
+    
 
 def check_num(number):
+    """Checks if input is a number"""
     try:
         float(number)
     except:
