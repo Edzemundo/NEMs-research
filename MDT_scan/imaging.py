@@ -49,14 +49,14 @@ def imagify(filelocin):
     grid = np.reshape(arr, (rows,columns))
     image = im.fromarray(grid.astype(np.uint8))
     image = image.rotate(90)
-    image = image.transpose(im.FLIP_TOP_BOTTOM)
+    image = image.transpose(method=im.Transpose.FLIP_TOP_BOTTOM)
     imagename = fileloc.replace(".txt",".png")
     image.save(imagename)
 
 
     print(f"rows = {rows}, columns = {columns}")
     print(f"max value = {max}, min value = {min}")
-    print(image)
+    print(f"Image has been created at '{imagename}'")
 
 if __name__ == "__main__":
     filelocin = input("drag and drop file here or type name of file if it is in the same folder/directory:")
