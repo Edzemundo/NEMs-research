@@ -5,6 +5,7 @@ This program creates an image of the txt file created by the scan.py program usi
 and an array created through numpy
 
 """
+import os
 import numpy as np
 from PIL import Image as im
 
@@ -19,10 +20,16 @@ def imagify(filelocin):
         dataraw = file.read()
         data = dataraw.split()
 
+    #determine step sizes
+    firstline = data[0].split(",")
+    secondline = data[1].split(",")
+    stepsizex = float(secondline[0]) - float(firstline[0])
+    stepsizey = float(input("Y step size: "))
+
     # determines dimensions of array
     lastline = data[-1].split(",")
-    rows = int(lastline[0])+1
-    columns = int(lastline[1])+1  
+    rows = int(float(lastline[0])/stepsizex)+1
+    columns = int(float(lastline[1])/stepsizey)+1
 
     # finding the min and max voltage values
     min = 100.0
