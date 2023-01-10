@@ -41,7 +41,7 @@ def run():
             # check_num(step)
             print(f"Step voltage = {step} volts")
             scan(startz, starty, stopz, stopy, step)
-            secondinput = input("Would you like to create an image from txt file?:")
+            secondinput = input("Would you like to create an image from txt/csv file?:")
             if secondinput.lower() == "yes" or "y" or "yeah" or "roger roger":
                 imagify(filename)
         
@@ -62,7 +62,7 @@ def run():
             # check_num(step)
             print(f"Step voltage = {step} volts")
             scan2(startz, starty, stopz, stopy, step)
-            secondinput = input("Would you like to create an image from txt file?:")
+            secondinput = input("Would you like to create an image from txt/csv file?:")
             if secondinput.lower() == "yes" or "y" or "yeah" or "roger roger":
                 imagify(filename)
         
