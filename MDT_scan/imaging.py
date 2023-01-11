@@ -14,10 +14,13 @@ from PIL import Image as im
 def imagify(filelocin):
     """determine if file is txt or csv then run appropriate function
     """
-    if filelocin.endswith(".csv"):
-        imagifycsv(filelocin)
+    fileloc = filelocin.replace("'","")
+    if fileloc.endswith(".csv"):
+        imagifycsv(fileloc)
+    elif fileloc.endswith(".txt"):
+        imagifytxt(fileloc)
     else:
-        imagifytxt(filelocin)
+        print("Only .csv and .txt file formats supported")
 
 
 
