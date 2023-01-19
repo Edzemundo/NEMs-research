@@ -67,18 +67,19 @@ def imagifytxt(filelocin):
         valuelist.append(value)
 
 # creating the array and picture from it and names picture after text file
+    global image # made global to open the image outside the function.
     arr = np.array(valuelist)
     grid = np.reshape(arr, (rows,columns))
     image = im.fromarray(grid.astype(np.uint8))
     image = image.rotate(90)
     image = image.transpose(method=im.Transpose.FLIP_TOP_BOTTOM)
-    imagename = fileloc.replace(".txt" or ".csv",".png")
-    image.save(imagename)
+    imageloc = fileloc.replace(".txt" or ".csv",".png")
+    image.save(imageloc)
 
 
     print(f"rows = {rows}, columns = {columns}")
     print(f"max value = {max}, min value = {min}")
-    print(f"Image has been created at '{imagename}'")
+    print(f"Image has been created at '{imageloc}'")
 
 
 
@@ -106,7 +107,6 @@ def imagifycsv(filelocin):
     max = -100.0
 
     for elements in data:
-        # element = elements.split(",")
         if float(elements[2]) < min:
             min = float(elements[2])
         if float(elements[2]) > max:
@@ -117,27 +117,29 @@ def imagifycsv(filelocin):
 
     ratio = lambda x : ((x-min)/(max-min))*255
     for elements in data:
-        # element = elements.split(",")
         value = int(ratio(float(elements[2])))
         valuelist.append(value)
 
+    
     # creating the array and picture from it and names picture after text file
+    global image # made global to open the image outside the function.
     arr = np.array(valuelist)
     grid = np.reshape(arr, (rows,columns))
     image = im.fromarray(grid.astype(np.uint8))
     image = image.rotate(90)
     image = image.transpose(method=im.Transpose.FLIP_TOP_BOTTOM)
-    imagename = fileloc.replace(".csv",".png")
-    image.save(imagename)
-
+    imageloc = fileloc.replace(".csv",".png")
+    image.save(imageloc)
 
     print(f"rows = {rows}, columns = {columns}")
     print(f"max value = {max}, min value = {min}")
-    print(f"Image has been created at '{imagename}'")
+    print(f"Image has been created at '{imageloc}'")
+
 
 
 if __name__ == "__main__":
     # filelocin = os.path.join(os.getcwd(),"sample124.csv") #test line
-    filelocin = input("drag and drop file here or type name of file if it is in the same folder/directory:")
+    filelocin = input("drag and drop file here or type name of file if it is in the same folder/directory: ")
     imagify(filelocin)
+    image.show()
     

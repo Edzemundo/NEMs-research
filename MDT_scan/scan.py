@@ -10,6 +10,7 @@ Program now also supports making the image of the file directly after scanning.
 
 import time
 import VISA
+import datetime
 from MDT import *
 from VISA import *
 from imaging import *
@@ -132,7 +133,8 @@ def scan(startz, starty, stopz, stopy, step):
 
     end_time = time.time()
     total_time = end_time - start_time
-    print(f"time = {total_time} seconds")
+    time_elapsed = str(datetime.timedelta(seconds = total_time))
+    print(f"time = {time_elapsed} hours")
 
 
 def scan2(startz, starty, stopz, stopy, step):
@@ -173,7 +175,8 @@ def scan2(startz, starty, stopz, stopy, step):
 
     end_time = time.time()
     total_time = end_time - start_time
-    print(f"time = {total_time} seconds")
+    time_elapsed = str(datetime.timedelta(seconds = total_time))
+    print(f"time = {time_elapsed} hours")
 
 
 def chart(x_value, y_value, z_value):
