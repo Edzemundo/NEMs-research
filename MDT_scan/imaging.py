@@ -68,13 +68,15 @@ def imagifytxt(filelocin):
 
 # creating the array and picture from it and names picture after text file
     global image # made global to open the image outside the function.
+    global resized_image
     arr = np.array(valuelist)
     grid = np.reshape(arr, (rows,columns))
     image = im.fromarray(grid.astype(np.uint8))
     image = image.rotate(90)
     image = image.transpose(method=im.Transpose.FLIP_TOP_BOTTOM)
     imageloc = fileloc.replace(".txt" or ".csv",".png")
-    image.save(imageloc)
+    resized_image = image.resize((image.size[0]*4, image.size[1]*4))
+    resized_image.save(imageloc)
 
 
     print(f"rows = {rows}, columns = {columns}")
@@ -123,13 +125,15 @@ def imagifycsv(filelocin):
     
     # creating the array and picture from it and names picture after text file
     global image # made global to open the image outside the function.
+    global resized_image
     arr = np.array(valuelist)
     grid = np.reshape(arr, (rows,columns))
     image = im.fromarray(grid.astype(np.uint8))
     image = image.rotate(90)
     image = image.transpose(method=im.Transpose.FLIP_TOP_BOTTOM)
     imageloc = fileloc.replace(".csv",".png")
-    image.save(imageloc)
+    resized_image = image.resize((image.size[0]*4, image.size[1]*4))
+    resized_image.save(imageloc)
 
     print(f"rows = {rows}, columns = {columns}")
     print(f"max value = {max}, min value = {min}")
@@ -141,5 +145,5 @@ if __name__ == "__main__":
     # filelocin = os.path.join(os.getcwd(),"sample124.csv") #test line
     filelocin = input("drag and drop file here or type name of file if it is in the same folder/directory: ")
     imagify(filelocin)
-    image.show()
+    resized_image.show()
     
