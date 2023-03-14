@@ -137,10 +137,10 @@ def scan(startz, starty, stopz, stopy, step):
     print(f"time = {time_elapsed} hours")
 
 
-def scan2(startz, starty, stopz, stopy, step):
+def scan2(startz, starty, stopz, stopy, step, namedfile):
 
     global filename
-    filename = input("filename: ")
+    filename = namedfile
     
     start_time = time.time()
     zvoltage = startz
