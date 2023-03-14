@@ -10,6 +10,7 @@ Program now also supports making the image of the file directly after scanning.
 
 import time
 import VISA
+import datetime
 from MDT import *
 from VISA import *
 from imaging import *
@@ -41,7 +42,7 @@ def run():
             # check_num(step)
             print(f"Step voltage = {step} volts")
             scan(startz, starty, stopz, stopy, step)
-            secondinput = input("Would you like to create an image from txt file?:")
+            secondinput = input("Would you like to create an image from txt/csv file?:")
             if secondinput.lower() == "yes" or "y" or "yeah" or "roger roger":
                 imagify(filename)
         
@@ -62,7 +63,7 @@ def run():
             # check_num(step)
             print(f"Step voltage = {step} volts")
             scan2(startz, starty, stopz, stopy, step)
-            secondinput = input("Would you like to create an image from txt file?:")
+            secondinput = input("Would you like to create an image from txt/csv file?:")
             if secondinput.lower() == "yes" or "y" or "yeah" or "roger roger":
                 imagify(filename)
         
@@ -132,13 +133,14 @@ def scan(startz, starty, stopz, stopy, step):
 
     end_time = time.time()
     total_time = end_time - start_time
-    print(f"time = {total_time} seconds")
+    time_elapsed = str(datetime.timedelta(seconds = total_time))
+    print(f"time = {time_elapsed} hours")
 
 
-def scan2(startz, starty, stopz, stopy, step):
+def scan2(startz, starty, stopz, stopy, step, namedfile):
 
     global filename
-    filename = input("filename: ")
+    filename = namedfile
     
     start_time = time.time()
     zvoltage = startz
@@ -173,7 +175,8 @@ def scan2(startz, starty, stopz, stopy, step):
 
     end_time = time.time()
     total_time = end_time - start_time
-    print(f"time = {total_time} seconds")
+    time_elapsed = str(datetime.timedelta(seconds = total_time))
+    print(f"time = {time_elapsed} hours")
 
 
 def chart(x_value, y_value, z_value):

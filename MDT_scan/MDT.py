@@ -3,6 +3,7 @@
 Author: Edmund Agyekum
 
 This program is meant to simplify the commands provided by the MDT_COMMAND_LIB to make using the library easier.
+A "wrapper" if you will...
 It also initially connects to the first MDT device it recognizes
 
 """
