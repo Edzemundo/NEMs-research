@@ -4,7 +4,7 @@ ECHO Created by ESA
 ECHO ===============================================
 
 
-ECHO Please make sure you have Pyhton 3 and pip 3 fully installed
+ECHO Please make sure you have Python3 and pip3 fully installed
 
 ECHO Setting up packages required for scan and imaging function...
 
