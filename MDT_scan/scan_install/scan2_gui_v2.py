@@ -7,7 +7,7 @@ porting from pure tk to pysimplegui which is a tk (among other packages) wrapper
 """
 
 import PySimpleGUI as sg
-# import scan as sc
+import scan as sc
 import imaging as im
 
 sg.theme("Dark Blue 6")
@@ -118,23 +118,23 @@ while True:
 
 
 
-    # if event == "scan2":
-    #     if completed_entry == True:  
-    #         if values[".csv"] == True:
-    #             namedfile = sg.popup_get_text("Enter file name(no need to add extension): ")
-    #             namedfile += ".csv"
-    #         else:
-    #             namedfile = sg.popup_get_text("Enter file name(no need to add extension): ")
-    #             namedfile += ".txt"
+    if event == "scan2":
+        if completed_entry == True:  
+            if values[".csv"] == True:
+                namedfile = sg.popup_get_text("Enter file name(no need to add extension): ")
+                namedfile += ".csv"
+            else:
+                namedfile = sg.popup_get_text("Enter file name(no need to add extension): ")
+                namedfile += ".txt"
             
-    #         window["statusout"].update(f"Creating {namedfile}")
-    #         sc.scan2(startz, starty, stopz, stopy, step, namedfile)
-    #         window["statusout"].update(f"{namedfile} created")
-    #         if values["image_request"] == True:
-    #             im.imagify(sc.filename, step)
+            window["statusout"].update(f"Creating {namedfile}")
+            sc.scan2(startz, starty, stopz, stopy, step, namedfile)
+            window["statusout"].update(f"{namedfile} created")
+            if values["image_request"] == True:
+                im.imagify(sc.filename, step)
 
-    #     else:
-    #         window["statusout"].update("You need to 'Set Values' first")
+        else:
+            window["statusout"].update("You need to 'Set Values' first")
         
         
 window.close()
