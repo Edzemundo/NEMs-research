@@ -138,6 +138,10 @@ def scan(startz, starty, stopz, stopy, step):
 
 
 def scan2(startz, starty, stopz, stopy, step, namedfile):
+    """peforms the same general function as scan but returns to the first column on value
+    on each row as opposed to starting from the last column value from the previous row.
+    For example, if each row has 10 values, it goes from (0,9) to (1,0) as opposed to (1,9). 
+    """
 
     global filename
     filename = namedfile
