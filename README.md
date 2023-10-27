@@ -6,4 +6,4 @@ This repository was initially created for the scanning of Nano Electromechanical
 1. Thorlabs MDT693B open-loop piezo controller
 2. Keithley DMM6500 digital multimeter
 
- This is done through the use multiple programs 
+ Programmed in Python. Tested for implementation on a Red Pitaya 125 development board.
